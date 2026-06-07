@@ -9,11 +9,16 @@ on:
       - 'ImGuiControl.cs'
       - 'ImGuiGodotControl.csproj'
       - '.github/workflows/build-and-pack.yml'
+  workflow_run:
+    workflows: ["Build and Pack ImGuiFSharp"]
+    types:
+      - completed
   workflow_dispatch:
 
 jobs:
   build-and-pack:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     permissions:
       packages: write
       contents: read
