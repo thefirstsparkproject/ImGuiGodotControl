@@ -1,0 +1,39 @@
+name: Build and Pack ImGuiGodotControl
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'GodotImGuiBackend.cs'
+      - 'GodotImGuiInputBridge.cs'
+      - 'ImGuiControl.cs'
+      - 'ImGuiGodotControl.csproj'
+      - '.github/workflows/build-and-pack.yml'
+  workflow_dispatch:
+
+jobs:
+  build-and-pack:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.x'
+          source-url: https://nuget.pkg.github.com/thefirstsparkproject/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Restore dependencies
+        run: dotnet restore ImGuiGodotControl.csproj
+
+      - name: Build and Pack NuGet
+        run: dotnet pack ImGuiGodotControl.csproj -c Release -o out
+
+      - name: Publish to GitHub Packages
+        run: dotnet nuget push out/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/thefirstsparkproject/index.json --skip-duplicate
