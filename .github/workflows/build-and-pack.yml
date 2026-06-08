@@ -1,8 +1,6 @@
 name: Build and Pack ImGuiGodotControl
 
 on:
-  push:
-    branches: [ main ]
   workflow_dispatch:
 
 jobs:
