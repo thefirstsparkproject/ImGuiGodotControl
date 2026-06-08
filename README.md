@@ -52,7 +52,7 @@ Add the package reference to your `.csproj`:
 
 ```xml
 <ItemGroup>
-  <PackageReference Include="ImGuiGodotControl" Version="1.0.0" />
+  <PackageReference Include="ImGuiGodotControl" Version="1.1.0" />
 </ItemGroup>
 ```
 
