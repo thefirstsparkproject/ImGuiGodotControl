@@ -75,10 +75,11 @@ public partial class ImGuiControl : Control
     [Export] public bool FullScreenWindowNoHeader { get; set; } = false;
 
     // Interface accessors
-    public IGuiFunctions    Gui    { get; protected set; }
-    public IPlotFunctions   Plot   { get; protected set; }
-    public IPlot3DFunctions Plot3D { get; protected set; }
-    public IFontFunctions   Fonts  { get; protected set; }
+    public IGuiFunctions         Gui        { get; protected set; }
+    public IPlotFunctions        Plot       { get; protected set; }
+    public IPlot3DFunctions      Plot3D     { get; protected set; }
+    public IFontFunctions        Fonts      { get; protected set; }
+    public INodeEditorFunctions  NodeEditor { get; protected set; }
 
     // Custom layout builder
     public IGuiBuilder Builder { get; set; }
@@ -105,10 +106,11 @@ public partial class ImGuiControl : Control
         _instance.Initialize();
 
         // Expose interfaces
-        Gui    = _instance.GuiImpl;
-        Plot   = _instance.PlotImpl;
-        Plot3D = _instance.Plot3DImpl;
-        Fonts  = _instance.FontsImpl;
+        Gui        = _instance.GuiImpl;
+        Plot       = _instance.PlotImpl;
+        Plot3D     = _instance.Plot3DImpl;
+        Fonts      = _instance.FontsImpl;
+        NodeEditor = _instance.NodeEditorImpl;
 
         var rdTex = _backend.OffscreenRdTexRid;
         if (rdTex.IsValid)
