@@ -3,16 +3,6 @@ name: Build and Pack ImGuiGodotControl
 on:
   push:
     branches: [ main ]
-    paths:
-      - 'GodotImGuiBackend.cs'
-      - 'GodotImGuiInputBridge.cs'
-      - 'ImGuiControl.cs'
-      - 'ImGuiGodotControl.csproj'
-      - '.github/workflows/build-and-pack.yml'
-  workflow_run:
-    workflows: ["Build and Pack ImGuiFSharp"]
-    types:
-      - completed
   workflow_dispatch:
 
 jobs:
